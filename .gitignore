@@ -1,0 +1,35 @@
+# Dependencias y builds
+node_modules/
+dist/
+release/
+out/
+dist-installer/
+
+# Artefactos transitorios de iconos y logs de build (build/ sí se versiona: icon.svg/ico/png)
+build/render.log
+build/builder.log
+build/_icon-render.html
+*.log
+
+# Pruebas
+tests/shots/
+
+# Documentos internos de trabajo (no van al repo)
+ROADMAP.md
+PLAN.md
+CLAUDE.md
+*-CLAUDE.md
+PRODUCT.md
+DESIGN.md
+.claude/
+.impeccable/
+
+# Secretos y datos locales
+.env
+*.env
+secrets*.json
+*.local
+
+# Sistema
+.DS_Store
+Thumbs.db
