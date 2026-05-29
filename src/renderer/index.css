@@ -1,0 +1,94 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-*: initial;
+  --color-bg: #0c0b10;
+  --color-surface: #15141b;
+  --color-surface-hover: #1e1d26;
+  --color-border: #2a2833;
+  --color-accent: #d4915c;
+  --color-accent-hover: #c9854f;
+  --color-accent-muted: #2e2118;
+  --color-success: #6bcb77;
+  --color-success-muted: #1a2e1d;
+  --color-danger: #e05252;
+  --color-danger-muted: #2e1818;
+  --color-warning: #e0c556;
+  --color-text-primary: #e5e2eb;
+  --color-text-secondary: #908da0;
+  --color-text-muted: #5a5768;
+  --color-black: #000000;
+  --color-white: #ffffff;
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', Consolas, monospace;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+  overflow: hidden;
+}
+
+/* Regiones de arrastre para la ventana frameless */
+.drag {
+  -webkit-app-region: drag;
+}
+.no-drag {
+  -webkit-app-region: no-drag;
+}
+
+/* Scrollbars planos acordes a la superficie */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 5px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+/* Pulso del indicador "corriendo" */
+@keyframes status-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+.status-pulse {
+  animation: status-pulse 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-pulse {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
