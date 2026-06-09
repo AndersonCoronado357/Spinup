@@ -1,0 +1,46 @@
+appId: com.spinup.app
+productName: Spinup
+copyright: Copyright © 2026 Spinup
+
+directories:
+  output: release
+  buildResources: build
+
+files:
+  - dist/**
+  - package.json
+
+# El icono llega tambien a la app instalada (no solo al instalador).
+extraResources:
+  - from: build/icon.ico
+    to: icon.ico
+  - from: build/icon.png
+    to: icon.png
+
+asar: true
+
+win:
+  icon: build/icon.ico
+  # Deja que rcedit escriba el icono y la version en el .exe; sin esto el
+  # ejecutable se queda con el icono de Electron aunque el instalador lleve el tuyo.
+  signAndEditExecutable: true
+  target:
+    - target: nsis
+      arch:
+        - x64
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  deleteAppDataOnUninstall: false
+  shortcutName: Spinup
+  installerIcon: build/icon.ico
+  uninstallerIcon: build/icon.ico
+  installerHeaderIcon: build/icon.ico
+
+# Actualizaciones automaticas: electron-updater lee latest.yml de esta carpeta,
+# que es la de descargas de la propia pagina. Declararlo aqui genera el latest.yml.
+publish:
+  - provider: generic
+    url: https://spinup.acmsy.com/descargas/
