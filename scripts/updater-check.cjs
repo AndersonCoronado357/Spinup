@@ -25,15 +25,19 @@ const server = http.createServer((req, res) => {
 });
 
 function realSha512() {
-  const exe = path.join(DESC, 'Spinup Setup 1.0.0.exe');
+  const exe = path.join(DESC, 'Spinup-Setup-1.0.0.exe');
   return crypto.createHash('sha512').update(fs.readFileSync(exe)).digest('base64');
 }
 
 app.on('window-all-closed', () => {});
 
 app.whenReady().then(async () => {
-  await new Promise((r) => server.listen(0, '127.0.0.1', r));
-  const feed = `http://127.0.0.1:${server.address().port}/`;
+  // Contra el servidor ya publicado si se pasa FEED_URL; si no, servidor local.
+  let feed = process.env.FEED_URL;
+  if (!feed) {
+    await new Promise((r) => server.listen(0, '127.0.0.1', r));
+    feed = `http://127.0.0.1:${server.address().port}/`;
+  }
 
   autoUpdater.autoDownload = false;
   autoUpdater.forceDevUpdateConfig = true; // permitir en modo no empaquetado
