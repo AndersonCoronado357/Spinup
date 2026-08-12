@@ -25,7 +25,7 @@ const server = http.createServer((req, res) => {
 });
 
 function realSha512() {
-  const exe = path.join(DESC, 'Spinup-Setup-1.0.0.exe');
+  const exe = path.join(DESC, 'Spinup-1.0.0.exe');
   return crypto.createHash('sha512').update(fs.readFileSync(exe)).digest('base64');
 }
 
