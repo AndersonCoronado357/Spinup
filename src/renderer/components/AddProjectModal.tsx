@@ -177,7 +177,7 @@ export default function AddProjectModal({
         role="dialog"
         aria-modal="true"
         aria-labelledby="project-modal-title"
-        className="z-50 w-[460px] max-w-[calc(100vw-48px)] rounded-xl bg-surface p-5 shadow-xl shadow-black/50"
+        className="z-50 w-[460px] max-w-[calc(100vw-48px)] rounded-xl bg-surface p-5"
       >
         <h2 id="project-modal-title" className="text-[15px] font-semibold">
           {initial ? 'Editar proyecto' : 'Agregar proyecto'}
@@ -263,7 +263,7 @@ export default function AddProjectModal({
                   <div
                     id="command-presets"
                     data-testid="command-presets"
-                    className="absolute top-full right-0 left-0 z-10 mt-1 rounded-md bg-surface-hover shadow-lg shadow-black/50"
+                    className="absolute top-full right-0 left-0 z-10 mt-1 rounded-md bg-surface-hover"
                   >
                     <div className="p-1.5">
                       <input

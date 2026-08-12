@@ -200,7 +200,7 @@ export default function ProjectCard({
             {menuOpen && (
               <div
                 role="menu"
-                className="absolute top-9 right-0 z-20 w-48 overflow-hidden rounded-md bg-surface-hover py-1 shadow-lg shadow-black/40"
+                className="absolute top-9 right-0 z-20 w-48 overflow-hidden rounded-md bg-surface-hover py-1"
               >
                 <button
                   type="button"
