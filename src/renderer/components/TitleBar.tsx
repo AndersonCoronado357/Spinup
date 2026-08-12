@@ -1,4 +1,5 @@
 import { CloseIcon, MaximizeIcon, MinusIcon, SpinupLogo } from './icons';
+import ThemeToggle from './ThemeToggle';
 
 interface TitleBarProps {
   total: number;
@@ -27,6 +28,9 @@ export default function TitleBar({ total, running }: TitleBarProps) {
             />
             {running} corriendo
           </span>
+        </div>
+        <div className="no-drag mr-2 flex items-center">
+          <ThemeToggle />
         </div>
         <div className="no-drag flex h-full">
           <button

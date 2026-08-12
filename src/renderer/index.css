@@ -9,6 +9,8 @@
   --color-accent: #d4915c;
   --color-accent-hover: #c9854f;
   --color-accent-muted: #2e2118;
+  --color-accent-ink: #d4915c;
+  --color-on-accent: #16100a;
   --color-success: #6bcb77;
   --color-success-muted: #1a2e1d;
   --color-danger: #e05252;
@@ -24,6 +26,53 @@
   --font-mono: 'JetBrains Mono', Consolas, monospace;
 }
 
+/* Tema claro: se activa con data-theme="light" en <html> (lo pone el toggle).
+   Los valores se eligen para mantener contraste AA en cada fondo. */
+:root[data-theme='light'] {
+  color-scheme: light;
+  --color-bg: #f4f2f8;
+  --color-surface: #ffffff;
+  --color-surface-hover: #ebe8f1;
+  --color-border: #e3dfea;
+  --color-accent: #c9854f;
+  --color-accent-hover: #b06f3b;
+  --color-accent-muted: #f4e7d9;
+  --color-accent-ink: #9a5321;
+  --color-on-accent: #1b1206;
+  --color-success: #14692a;
+  --color-success-muted: #e6f4e9;
+  --color-danger: #b5271b;
+  --color-danger-muted: #f8e5e2;
+  --color-warning: #a87a09;
+  --color-text-primary: #191620;
+  --color-text-secondary: #565163;
+  --color-text-muted: #6f6a7b;
+}
+
+/* Modo "sistema" (sin data-theme): sigue el prefers-color-scheme del SO. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    color-scheme: light;
+    --color-bg: #f4f2f8;
+    --color-surface: #ffffff;
+    --color-surface-hover: #ebe8f1;
+    --color-border: #e3dfea;
+    --color-accent: #c9854f;
+    --color-accent-hover: #b06f3b;
+    --color-accent-muted: #f4e7d9;
+    --color-accent-ink: #9a5321;
+    --color-on-accent: #1b1206;
+    --color-success: #14692a;
+    --color-success-muted: #e6f4e9;
+    --color-danger: #b5271b;
+    --color-danger-muted: #f8e5e2;
+    --color-warning: #a87a09;
+    --color-text-primary: #191620;
+    --color-text-secondary: #565163;
+    --color-text-muted: #6f6a7b;
+  }
+}
+
 html,
 body,
 #root {
@@ -37,6 +86,53 @@ body {
   -webkit-font-smoothing: antialiased;
   user-select: none;
   overflow: hidden;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+/* ---------- Conmutador de tema (barra de título): Claro / Oscuro / Sistema ---------- */
+.theme-seg {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--color-bg);
+}
+.theme-seg button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 27px;
+  height: 22px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+.theme-seg button:hover {
+  color: var(--color-text-primary);
+}
+.theme-seg button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-accent);
+}
+/* El activo se resalta con el acento (como el resto de estados seleccionados). */
+.theme-seg button[data-on='true'] {
+  background: var(--color-accent-muted);
+  color: var(--color-accent-ink);
+}
+@media (prefers-reduced-motion: reduce) {
+  body,
+  .theme-seg button {
+    transition: none;
+  }
 }
 
 /* Regiones de arrastre para la ventana frameless */
