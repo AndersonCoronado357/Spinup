@@ -5,7 +5,7 @@
 //  - contraste AA de los textos sobre su fondo real
 // La URL se pasa por variable de entorno (Electron muere con 255 si es argumento).
 'use strict';
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, nativeTheme } = require('electron');
 const http = require('node:http');
 const fs = require('node:fs');
 const path = require('node:path');
@@ -90,7 +90,12 @@ const MEASURE = `(() => {
     const bg = bgOf(el);
     contrast.push({ sel: s, ratio: Math.round(ratio(fg, bg) * 100) / 100 });
   });
-  return { overflow, images, contrast };
+  const hex = (a) => '#' + a.slice(0, 3).map((n) => Math.round(n).toString(16).padStart(2, '0')).join('');
+  const cta = document.querySelector('.topnav__cta');
+  const ctaInfo = cta
+    ? { color: hex(parse(getComputedStyle(cta).color)), bg: hex(bgOf(cta)), ratio: Math.round(ratio(parse(getComputedStyle(cta).color), bgOf(cta)) * 100) / 100 }
+    : null;
+  return { overflow, images, contrast, cta: ctaInfo };
 })()`;
 
 async function loadWithRetry(win, url, tries = 4) {
@@ -117,33 +122,38 @@ app.whenReady().then(async () => {
     { name: '1440', w: 1440, h: 900 },
     { name: '390', w: 390, h: 844 },
   ];
+  const themes = ['dark', 'light']; // la web cambia sola por prefers-color-scheme
   const out = {};
-  for (const vp of viewports) {
-    // Ventana oculta fuera de pantalla (no roba foco, no se ve): carga http de
-    // forma fiable y permite capturePage, a diferencia del offscreen puro.
-    const win = new BrowserWindow({
-      width: vp.w,
-      height: vp.h,
-      show: false,
-      frame: false,
-      skipTaskbar: true,
-      webPreferences: { offscreen: false },
-    });
-    win.setPosition(-6000, 0);
-    win.setContentSize(vp.w, vp.h);
-    await loadWithRetry(win, url);
-    win.showInactive();
-    await delay(1700); // deja correr el fallback del reveal
-    out[vp.name] = await win.webContents.executeJavaScript(MEASURE);
-    // Captura a altura completa para revisar toda la pagina.
-    const fullH = await win.webContents.executeJavaScript(
-      'document.documentElement.scrollHeight',
-    );
-    win.setContentSize(vp.w, Math.min(fullH, 8000));
-    await delay(500);
-    const img = await win.webContents.capturePage();
-    fs.writeFileSync(path.join(ROOT, `assets/raw/render-${vp.name}.png`), img.toPNG());
-    win.destroy();
+  for (const theme of themes) {
+    nativeTheme.themeSource = theme; // emula el prefers-color-scheme del sistema
+    for (const vp of viewports) {
+      const key = `${theme}-${vp.name}`;
+      // Ventana oculta fuera de pantalla (no roba foco, no se ve): carga http de
+      // forma fiable y permite capturePage, a diferencia del offscreen puro.
+      const win = new BrowserWindow({
+        width: vp.w,
+        height: vp.h,
+        show: false,
+        frame: false,
+        skipTaskbar: true,
+        webPreferences: { offscreen: false },
+      });
+      win.setPosition(-6000, 0);
+      win.setContentSize(vp.w, vp.h);
+      await loadWithRetry(win, url);
+      win.showInactive();
+      await delay(1700); // deja correr el fallback del reveal
+      out[key] = await win.webContents.executeJavaScript(MEASURE);
+      // Captura a altura completa para revisar toda la pagina.
+      const fullH = await win.webContents.executeJavaScript(
+        'document.documentElement.scrollHeight',
+      );
+      win.setContentSize(vp.w, Math.min(fullH, 8000));
+      await delay(500);
+      const img = await win.webContents.capturePage();
+      fs.writeFileSync(path.join(ROOT, `assets/raw/render-${key}.png`), img.toPNG());
+      win.destroy();
+    }
   }
   fs.writeFileSync(path.join(ROOT, 'assets/raw/verify.json'), JSON.stringify(out, null, 2));
   console.log(JSON.stringify(out, null, 2));
