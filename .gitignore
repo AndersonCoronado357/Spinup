@@ -21,8 +21,13 @@ CLAUDE.md
 *-CLAUDE.md
 PRODUCT.md
 DESIGN.md
+README.md
+docs/
 .claude/
 .impeccable/
+
+# Salidas transitorias de scripts de build/verificación
+build/*.txt
 
 # Secretos y datos locales
 .env
