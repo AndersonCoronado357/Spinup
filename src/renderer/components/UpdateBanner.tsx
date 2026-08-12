@@ -35,14 +35,14 @@ export default function UpdateBanner() {
       <span className="text-text-primary">
         {phase === 'downloaded' ? (
           <>
-            Versión <span className="font-semibold text-accent">{version}</span> lista para instalar.
+            Versión <span className="font-semibold text-accent-ink">{version}</span> lista para instalar.
           </>
         ) : phase === 'downloading' ? (
           <>Descargando la versión {version}… {percent}%</>
         ) : (
           <>
             Hay una versión nueva disponible:{' '}
-            <span className="font-semibold text-accent">{version}</span>.
+            <span className="font-semibold text-accent-ink">{version}</span>.
           </>
         )}
       </span>
@@ -55,7 +55,7 @@ export default function UpdateBanner() {
               setPhase('downloading');
               window.api.downloadUpdate();
             }}
-            className="rounded-md bg-accent px-3 py-1 font-semibold text-bg transition-colors duration-150 hover:bg-accent-hover focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:outline-none"
+            className="rounded-md bg-accent px-3 py-1 font-semibold text-on-accent transition-colors duration-150 hover:bg-accent-hover focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:outline-none"
           >
             Descargar
           </button>
@@ -65,7 +65,7 @@ export default function UpdateBanner() {
             type="button"
             data-testid="btn-update-install"
             onClick={() => window.api.installUpdate()}
-            className="rounded-md bg-accent px-3 py-1 font-semibold text-bg transition-colors duration-150 hover:bg-accent-hover focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:outline-none"
+            className="rounded-md bg-accent px-3 py-1 font-semibold text-on-accent transition-colors duration-150 hover:bg-accent-hover focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:outline-none"
           >
             Reiniciar e instalar
           </button>

@@ -120,7 +120,7 @@ export default function App() {
               type="button"
               data-testid="btn-add-project"
               onClick={() => setModal({ mode: 'add' })}
-              className="flex shrink-0 items-center gap-1.5 rounded-md bg-accent px-3.5 py-2 text-[13px] font-semibold text-bg transition-colors duration-150 hover:bg-accent-hover focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:outline-none"
+              className="flex shrink-0 items-center gap-1.5 rounded-md bg-accent px-3.5 py-2 text-[13px] font-semibold text-on-accent transition-colors duration-150 hover:bg-accent-hover focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:outline-none"
             >
               <PlusIcon />
               Agregar proyecto
@@ -178,7 +178,7 @@ function EmptyState({ onAdd }: { onAdd: () => void }) {
       data-testid="empty-state"
       className="flex flex-col items-center rounded-[10px] bg-surface px-6 py-14 text-center"
     >
-      <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-accent-muted text-accent">
+      <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-accent-muted text-accent-ink">
         <TerminalIcon size={20} />
       </div>
       <p className="mt-4 text-sm font-medium">Aún no hay proyectos</p>
@@ -191,7 +191,7 @@ function EmptyState({ onAdd }: { onAdd: () => void }) {
         type="button"
         data-testid="btn-add-first"
         onClick={onAdd}
-        className="mt-5 flex items-center gap-1.5 rounded-md bg-accent-muted px-3.5 py-2 text-[13px] font-medium text-accent transition-colors duration-150 hover:bg-accent hover:text-bg focus-visible:ring-1 focus-visible:ring-accent focus-visible:outline-none"
+        className="mt-5 flex items-center gap-1.5 rounded-md bg-accent-muted px-3.5 py-2 text-[13px] font-medium text-accent-ink transition-colors duration-150 hover:bg-accent hover:text-on-accent focus-visible:ring-1 focus-visible:ring-accent focus-visible:outline-none"
       >
         <PlusIcon />
         Agregar tu primer proyecto

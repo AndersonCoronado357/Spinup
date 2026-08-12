@@ -224,7 +224,7 @@ export default function AddProjectModal({
                 type="button"
                 data-testid="btn-browse"
                 onClick={handleBrowse}
-                className="flex shrink-0 items-center gap-1.5 rounded-md bg-accent-muted px-3 text-xs font-medium text-accent transition-colors duration-150 hover:bg-accent hover:text-bg focus-visible:ring-1 focus-visible:ring-accent focus-visible:outline-none"
+                className="flex shrink-0 items-center gap-1.5 rounded-md bg-accent-muted px-3 text-xs font-medium text-accent-ink transition-colors duration-150 hover:bg-accent hover:text-on-accent focus-visible:ring-1 focus-visible:ring-accent focus-visible:outline-none"
               >
                 <FolderIcon />
                 Examinar
@@ -297,7 +297,7 @@ export default function AddProjectModal({
                           aria-selected={false}
                           data-testid="command-custom"
                           onClick={() => pickCommand(search.trim())}
-                          className="block w-full px-3 py-1.5 text-left font-mono text-xs text-accent transition-colors duration-150 hover:bg-border/60 focus-visible:bg-border/60 focus-visible:outline-none"
+                          className="block w-full px-3 py-1.5 text-left font-mono text-xs text-accent-ink transition-colors duration-150 hover:bg-border/60 focus-visible:bg-border/60 focus-visible:outline-none"
                         >
                           Usar «{search.trim()}»
                         </button>
@@ -316,7 +316,7 @@ export default function AddProjectModal({
                               data-testid="command-preset"
                               onClick={() => pickCommand(preset)}
                               className={`block w-full px-3 py-1.5 text-left font-mono text-xs transition-colors duration-150 hover:bg-border/60 focus-visible:bg-border/60 focus-visible:outline-none ${
-                                command === preset ? 'text-accent' : 'text-text-primary'
+                                command === preset ? 'text-accent-ink' : 'text-text-primary'
                               }`}
                             >
                               {preset}
@@ -377,7 +377,7 @@ export default function AddProjectModal({
               type="submit"
               data-testid="btn-save"
               disabled={saving}
-              className="rounded-md bg-accent px-3.5 py-2 text-[13px] font-semibold text-bg transition-colors duration-150 hover:bg-accent-hover focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-60"
+              className="rounded-md bg-accent px-3.5 py-2 text-[13px] font-semibold text-on-accent transition-colors duration-150 hover:bg-accent-hover focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-60"
             >
               {initial ? 'Guardar cambios' : 'Agregar proyecto'}
             </button>

@@ -121,7 +121,7 @@ export default function ProjectCard({
             >
               {project.command}
             </span>
-            <span className="shrink-0 text-accent" title={`Puerto esperado: ${project.port}`}>
+            <span className="shrink-0 text-accent-ink" title={`Puerto esperado: ${project.port}`}>
               :{project.port}
             </span>
           </div>
@@ -135,7 +135,7 @@ export default function ProjectCard({
               onClick={() => void window.api.openExternal(url)}
               title={`Abrir ${url} en el navegador`}
               aria-label={`Abrir ${url} en el navegador`}
-              className="flex h-8 items-center gap-1.5 rounded-md bg-accent-muted px-2.5 font-mono text-[11px] text-accent transition-colors duration-150 hover:bg-accent hover:text-bg focus-visible:ring-1 focus-visible:ring-accent focus-visible:outline-none"
+              className="flex h-8 items-center gap-1.5 rounded-md bg-accent-muted px-2.5 font-mono text-[11px] text-accent-ink transition-colors duration-150 hover:bg-accent hover:text-on-accent focus-visible:ring-1 focus-visible:ring-accent focus-visible:outline-none"
             >
               <ExternalLinkIcon />:{new URL(url).port}
             </button>
@@ -149,7 +149,7 @@ export default function ProjectCard({
             aria-expanded={expanded}
             className={`flex h-8 w-8 items-center justify-center rounded-md transition-colors duration-150 focus-visible:ring-1 focus-visible:ring-accent focus-visible:outline-none ${
               expanded
-                ? 'bg-accent-muted text-accent'
+                ? 'bg-accent-muted text-accent-ink'
                 : 'text-text-secondary hover:bg-surface-hover hover:text-text-primary'
             }`}
           >
